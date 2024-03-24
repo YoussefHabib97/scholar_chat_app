@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scholar_chat_app/pages/login_page.dart';
 import 'package:scholar_chat_app/widgets/custom_button.dart';
@@ -10,6 +13,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late String email, password;
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -30,20 +34,34 @@ class RegisterPage extends StatelessWidget {
                     fontSize: 24,
                   ),
                 ),
-                const CustomTextField(
+                CustomTextField(
+                  onChanged: (value) {
+                    email = value!;
+                  },
                   labelText: 'Email',
                   hintText: 'example@domain.com',
                   keyboardType: TextInputType.emailAddress,
                   obscureText: false,
                 ),
-                const CustomTextField(
+                CustomTextField(
+                  onChanged: (value) {
+                    password = value!;
+                  },
                   labelText: 'Password',
                   hintText: 'Enter at least 7 characters',
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                 ),
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final auth = FirebaseAuth.instance;
+                    UserCredential user =
+                        await auth.createUserWithEmailAndPassword(
+                      email: email,
+                      password: password,
+                    );
+                    log(user.toString());
+                  },
                   buttonText: "Register",
                 ),
                 Row(

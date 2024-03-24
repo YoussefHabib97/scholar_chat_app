@@ -30,13 +30,15 @@ class LoginPage extends StatelessWidget {
                     fontSize: 24,
                   ),
                 ),
-                const CustomTextField(
+                CustomTextField(
+                  onChanged: (value) {},
                   labelText: 'Email',
                   hintText: 'example@domain.com',
                   keyboardType: TextInputType.emailAddress,
                   obscureText: false,
                 ),
-                const CustomTextField(
+                CustomTextField(
+                  onChanged: (value) {},
                   labelText: 'Password',
                   hintText: 'Enter at least 7 characters',
                   keyboardType: TextInputType.visiblePassword,
