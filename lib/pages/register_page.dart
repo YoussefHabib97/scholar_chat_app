@@ -18,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    late String email, password;
+    String? email, password;
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   CustomTextField(
                     onChanged: (value) {
-                      email = value!;
+                      email = value;
                     },
                     labelText: 'Email',
                     hintText: 'example@domain.com',
@@ -52,9 +52,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   CustomTextField(
                     onChanged: (value) {
-                      if (value == null || value.isEmpty) {
-                        return '';
-                      }
                       return password = value;
                     },
                     labelText: 'Password',
@@ -64,13 +61,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   CustomButton(
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()) {}
-                      try {
-                        await registerUser(email, password);
-                      } on FirebaseAuthException catch (e) {
-                        showSnackBar(context, e);
-                      } catch (e) {
-                        showSnackBar(context, e);
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          await registerUser(email!, password!);
+                        } on FirebaseAuthException catch (e) {
+                          showSnackBar(context, e);
+                        } catch (e) {
+                          showSnackBar(context, e);
+                        }
                       }
                     },
                     buttonText: "Register",
