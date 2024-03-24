@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
+  // final String Function(String? value) validator;
   final Function(String? value) onChanged;
   final String labelText;
   final String hintText;
@@ -8,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   const CustomTextField({
     super.key,
+    // required this.validator,
     required this.onChanged,
     required this.labelText,
     required this.hintText,
@@ -19,7 +21,13 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please type something';
+          }
+          return null;
+        },
         onChanged: onChanged,
         obscureText: obscureText,
         keyboardType: keyboardType,
