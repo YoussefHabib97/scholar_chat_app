@@ -1,5 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:scholar_chat_app/helpers/show_snack_bar.dart';
 import 'package:scholar_chat_app/pages/login_page.dart';
 import 'package:scholar_chat_app/widgets/custom_button.dart';
 import 'package:scholar_chat_app/widgets/custom_text_field.dart';
@@ -46,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontSize: 24,
                       ),
                     ),
-                    CustomTextField(
+                    CustomTextFormField(
                       onChanged: (value) {
                         email = value;
                       },
@@ -55,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       keyboardType: TextInputType.emailAddress,
                       obscureText: false,
                     ),
-                    CustomTextField(
+                    CustomTextFormField(
                       onChanged: (value) {
                         return password = value;
                       },
@@ -106,16 +107,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  void showSnackBar(BuildContext context, dynamic e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          e.toString(),
         ),
       ),
     );

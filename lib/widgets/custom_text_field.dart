@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextFormField extends StatelessWidget {
   // final String Function(String? value) validator;
   final Function(String? value) onChanged;
   final String labelText;
   final String hintText;
   final TextInputType keyboardType;
   final bool obscureText;
-  const CustomTextField({
+  const CustomTextFormField({
     super.key,
     // required this.validator,
     required this.onChanged,
