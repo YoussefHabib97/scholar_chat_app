@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:scholar_chat_app/helpers/show_snack_bar.dart';
 import 'package:scholar_chat_app/pages/register_page.dart';
 import 'package:scholar_chat_app/widgets/custom_button.dart';
-import 'package:scholar_chat_app/widgets/custom_text_field.dart';
+import 'package:scholar_chat_app/widgets/custom_text_form_field.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginPage extends StatefulWidget {
