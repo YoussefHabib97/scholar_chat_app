@@ -58,9 +58,15 @@ class ChatPage extends StatelessWidget {
                     physics: const AlwaysScrollableScrollPhysics(),
                     controller: scrollController,
                     itemCount: messagesList.length,
-                    itemBuilder: (context, index) => ChatBubble(
-                      text: messagesList[index].text,
-                    ),
+                    itemBuilder: (context, index) {
+                      return messagesList[index].id == email
+                          ? ChatBubble(
+                              text: messagesList[index].text,
+                            )
+                          : ChatBubbleSecondary(
+                              text: messagesList[index].text,
+                            );
+                    },
                   ),
                 ),
                 Padding(

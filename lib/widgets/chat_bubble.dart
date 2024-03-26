@@ -48,7 +48,7 @@ class ChatBubbleSecondary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.centerRight,
       child: Container(
         // height: 32,
         padding: const EdgeInsets.all(16),
@@ -61,10 +61,10 @@ class ChatBubbleSecondary extends StatelessWidget {
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(32),
             topRight: Radius.circular(32),
-            bottomRight: Radius.circular(32),
-            bottomLeft: Radius.circular(0),
+            bottomRight: Radius.circular(0),
+            bottomLeft: Radius.circular(32),
           ),
-          color: Theme.of(context).primaryColor.withAlpha(128),
+          color: Theme.of(context).primaryColor.withAlpha(64),
         ),
         child: Text(text),
       ),
