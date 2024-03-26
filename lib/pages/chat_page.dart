@@ -27,9 +27,27 @@ class ChatPage extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView.builder(
-        itemCount: 2,
-        itemBuilder: (context, index) => const ChatBubble(),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: 20,
+              itemBuilder: (context, index) => const ChatBubble(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Message",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                suffix: const Icon(Icons.send),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
