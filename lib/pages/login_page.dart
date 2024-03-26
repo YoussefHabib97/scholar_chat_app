@@ -73,14 +73,20 @@ class _LoginPageState extends State<LoginPage> {
                           });
                           try {
                             await loginUser(email!, password!);
-                            showSnackBar(
-                              context,
-                              'User signed in successfully.',
-                            );
+                            if (context.mounted) {
+                              showSnackBar(
+                                context,
+                                'User signed in successfully.',
+                              );
+                            }
                           } on FirebaseAuthException catch (e) {
-                            showSnackBar(context, e);
+                            if (context.mounted) {
+                              showSnackBar(context, e);
+                            }
                           } catch (e) {
-                            showSnackBar(context, e);
+                            if (context.mounted) {
+                              showSnackBar(context, e);
+                            }
                           }
                           setState(() {
                             isLoading = false;

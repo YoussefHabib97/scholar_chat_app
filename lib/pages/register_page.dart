@@ -73,14 +73,20 @@ class _RegisterPageState extends State<RegisterPage> {
                           });
                           try {
                             await registerUser(email!, password!);
-                            showSnackBar(
-                              context,
-                              'User registered successfully.',
-                            );
+                            if (context.mounted) {
+                              showSnackBar(
+                                context,
+                                'User registered successfully.',
+                              );
+                            }
                           } on FirebaseAuthException catch (e) {
-                            showSnackBar(context, e);
+                            if (context.mounted) {
+                              showSnackBar(context, e);
+                            }
                           } catch (e) {
-                            showSnackBar(context, e);
+                            if (context.mounted) {
+                              showSnackBar(context, e);
+                            }
                           }
                           setState(() {
                             isLoading = false;
