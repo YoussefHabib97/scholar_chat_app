@@ -5,7 +5,9 @@ import 'package:scholar_chat_app/widgets/chat_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  const ChatPage({
+    super.key,
+  });
 
   static const String route = 'chat_page';
 
@@ -15,6 +17,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments as String;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection(kMessagesCollection)
@@ -71,6 +74,7 @@ class ChatPage extends StatelessWidget {
                             .instance
                             .collection(kMessagesCollection);
                         await messages.add({
+                          'id': email,
                           kMessageText: data,
                           kMessageCreatedAt: DateTime.now(),
                         });

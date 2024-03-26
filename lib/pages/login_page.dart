@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:scholar_chat_app/helpers/show_snack_bar.dart';
+import 'package:scholar_chat_app/pages/chat_page.dart';
 import 'package:scholar_chat_app/pages/register_page.dart';
 import 'package:scholar_chat_app/widgets/custom_button.dart';
 import 'package:scholar_chat_app/widgets/custom_text_form_field.dart';
@@ -74,9 +75,9 @@ class _LoginPageState extends State<LoginPage> {
                           try {
                             await loginUser(email!, password!);
                             if (context.mounted) {
-                              showSnackBar(
-                                context,
-                                'User signed in successfully.',
+                              Navigator.of(context).pushReplacementNamed(
+                                ChatPage.route,
+                                arguments: email!,
                               );
                             }
                           } on FirebaseAuthException catch (e) {

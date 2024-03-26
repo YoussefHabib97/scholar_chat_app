@@ -30,11 +30,11 @@ class ScholarChat extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Scholar',
-      initialRoute: ChatPage.route,
+      initialRoute: LoginPage.route,
       routes: {
         LoginPage.route: (context) => const LoginPage(),
         RegisterPage.route: (context) => const RegisterPage(),
-        ChatPage.route: (context) => ChatPage(),
+        ChatPage.route: (context) => const ChatPage(),
       },
     );
   }
