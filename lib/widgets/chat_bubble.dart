@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatelessWidget {
+  final String text;
   const ChatBubble({
     super.key,
+    required this.text,
   });
 
   // Consider UnrestrictedBox in the future
@@ -28,7 +30,7 @@ class ChatBubble extends StatelessWidget {
           ),
           color: Theme.of(context).primaryColor.withAlpha(128),
         ),
-        child: const Text("Hello, World!"),
+        child: Text(text),
       ),
     );
   }
