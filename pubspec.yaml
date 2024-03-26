@@ -13,7 +13,6 @@ dependencies:
   firebase_storage: ^11.6.10
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.5
   modal_progress_hud_nsn: ^0.5.1
 
 dev_dependencies:

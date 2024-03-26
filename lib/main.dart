@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:scholar_chat_app/firebase_options.dart';
 import 'package:scholar_chat_app/pages/chat_page.dart';
 import 'package:scholar_chat_app/pages/login_page.dart';
@@ -31,18 +30,7 @@ class ScholarChat extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Scholar',
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).pushReplacementNamed(ChatPage.route,
-                  arguments: FirebaseAuth.instance.currentUser!.email);
-            });
-          }
-          return const LoginPage();
-        },
-      ),
+      initialRoute: LoginPage.route,
       routes: {
         LoginPage.route: (context) => const LoginPage(),
         RegisterPage.route: (context) => const RegisterPage(),
