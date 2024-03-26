@@ -14,8 +14,10 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: FirebaseFirestore.instance.collection(kMessagesCollection).get(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection(kMessagesCollection)
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
