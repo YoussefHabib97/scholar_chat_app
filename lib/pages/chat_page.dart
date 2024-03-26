@@ -5,18 +5,20 @@ import 'package:scholar_chat_app/widgets/chat_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatPage extends StatelessWidget {
-  ChatPage({super.key});
+  const ChatPage({super.key});
 
   static const String route = 'chat_page';
 
-  final messageController = TextEditingController();
+  static final messageController = TextEditingController();
+
+  static final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection(kMessagesCollection)
-          .orderBy(kMessageCreatedAt)
+          .orderBy(kMessageCreatedAt, descending: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -49,6 +51,9 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    reverse: true,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: scrollController,
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) => ChatBubble(
                       text: messagesList[index].text,
@@ -60,15 +65,24 @@ class ChatPage extends StatelessWidget {
                   child: TextField(
                     controller: messageController,
                     onSubmitted: (data) async {
-                      CollectionReference messages = FirebaseFirestore.instance
-                          .collection(kMessagesCollection);
-                      await messages.add({
-                        kMessageText: data,
-                        kMessageCreatedAt: DateTime.now(),
-                      });
-                      messageController.clear();
+                      if (data.isEmpty) {
+                      } else {
+                        CollectionReference messages = FirebaseFirestore
+                            .instance
+                            .collection(kMessagesCollection);
+                        await messages.add({
+                          kMessageText: data,
+                          kMessageCreatedAt: DateTime.now(),
+                        });
+                        messageController.clear();
+                        scrollController.animateTo(
+                          0,
+                          duration: const Duration(milliseconds: 750),
+                          curve: Curves.fastOutSlowIn,
+                        );
+                      }
                     },
-                    // keyboardType: TextInputType.multiline,
+                    textCapitalization: TextCapitalization.sentences,
                     decoration: InputDecoration(
                       hintText: "Message",
                       border: OutlineInputBorder(
