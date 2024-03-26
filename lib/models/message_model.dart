@@ -8,6 +8,8 @@ class MessageModel {
   });
 
   factory MessageModel.fromJson(json) {
-    return MessageModel(text: json[kMessageText]);
+    return MessageModel(
+      text: json[kMessageText],
+    );
   }
 }

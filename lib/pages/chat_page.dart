@@ -10,19 +10,21 @@ class ChatPage extends StatelessWidget {
   static const String route = 'chat_page';
 
   final messageController = TextEditingController();
-  final List<MessageModel> messagesList = [];
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection(kMessagesCollection)
+          .orderBy(kMessageCreatedAt)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            messagesList.add(MessageModel.fromJson(snapshot.data!.docs[i]));
+          final List<MessageModel> messagesList = [];
+          for (var message in snapshot.data!.docs) {
+            messagesList.add(MessageModel.fromJson(message));
           }
+
           return Scaffold(
             appBar: AppBar(
               elevation: 0,
@@ -61,7 +63,8 @@ class ChatPage extends StatelessWidget {
                       CollectionReference messages = FirebaseFirestore.instance
                           .collection(kMessagesCollection);
                       await messages.add({
-                        'text': data,
+                        kMessageText: data,
+                        kMessageCreatedAt: DateTime.now(),
                       });
                       messageController.clear();
                     },
