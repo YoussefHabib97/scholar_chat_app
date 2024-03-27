@@ -8,4 +8,4 @@ final class LoginLoading extends LoginState {}
 
 final class LoginSuccess extends LoginState {}
 
-final class LoginFail extends LoginState {}
+final class LoginFailure extends LoginState {}
