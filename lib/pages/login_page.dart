@@ -35,6 +35,9 @@ class LoginPage extends StatelessWidget {
         } else if (state is LoginFailure) {
           isLoading = false;
           showSnackBar(context, state.errMessage);
+        } else if (state is LoginFailure) {
+          isLoading = false;
+          showSnackBar(context, state.errMessage);
         }
       },
       child: ModalProgressHUD(
