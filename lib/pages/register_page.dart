@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_chat_app/cubits/chat_cubit/chat_cubit.dart';
 import 'package:scholar_chat_app/cubits/register_cubit/register_cubit.dart';
 import 'package:scholar_chat_app/helpers/show_snack_bar.dart';
 import 'package:scholar_chat_app/pages/chat_page.dart';
@@ -27,6 +28,7 @@ class RegisterPage extends StatelessWidget {
           isLoading = true;
         } else if (state is RegisterSuccess) {
           isLoading = false;
+          BlocProvider.of<ChatCubit>(context).getMessages();
           Navigator.of(context).pushReplacementNamed(
             ChatPage.route,
             arguments: email,
